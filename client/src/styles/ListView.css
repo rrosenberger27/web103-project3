@@ -1,0 +1,33 @@
+@import url('../App.css');
+
+.list-view-title {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 3em;
+}
+
+
+.tshirt-list {
+  display: grid;
+  margin-top: 20px;
+  width: 80%;
+  height: fit-content;
+  justify-self: center;
+  border-radius: 30px;
+  background-color: var(--fg);
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 100px;
+  padding: 30px;
+  grid-auto-rows: 1fr;
+  justify-items: center;
+}
+
+.tshirt-list .button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  gap: 20px;
+  background-color: var(--bg);
+  height: 60px;
+  border-radius: 20px;
+}

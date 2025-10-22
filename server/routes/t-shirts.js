@@ -1,5 +1,5 @@
 import express from "express";
-import { TshirtController } from "../controllers/t-shirts.js";
+import TshirtController from "../controllers/t-shirts.js"; 
 
 const tshirtRouter = express.Router();
 

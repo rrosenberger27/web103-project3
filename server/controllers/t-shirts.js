@@ -30,6 +30,7 @@ const TshirtController = {
             );
             res.status(201).json(results.rows[0]);
         } catch (error) {
+            console.error('Error creating t-shirt:', error);
             res.status(500).json({ error: 'Database query error' });
         }
     },

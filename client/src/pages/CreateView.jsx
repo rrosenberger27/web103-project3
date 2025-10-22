@@ -19,10 +19,20 @@ const CreateView = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setTshirt({
-      ...tshirt,
-      [name]: value
-    });
+
+    if (name === 'name') {
+      const sanitized = value.replace(/[\r\n]/g, '').slice(0, 100);
+      setTshirt(prev => ({ ...prev, name: sanitized }));
+      return;
+    }
+
+    setTshirt(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleNameKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -50,6 +60,7 @@ const CreateView = () => {
               name="name"
               value={tshirt.name}
               onChange={handleInputChange}
+              onKeyDown={handleNameKeyDown}
             />
           <Dropdown
             label="Color"

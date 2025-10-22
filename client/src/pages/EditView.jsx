@@ -5,6 +5,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { category_to_options } from "../utils/mappings";
+import Dropdown from "../components/Dropdown";
+import TshirtCard from "../components/TshirtCard";
 
 
 const EditView = () => {
@@ -25,11 +27,21 @@ const EditView = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setTshirt({
-            ...tshirt,
-            [name]: value
-        });
-    }
+
+        if (name === 'name') {
+        const sanitized = value.replace(/[\r\n]/g, '').slice(0, 100);
+        setTshirt(prev => ({ ...prev, name: sanitized }));
+        return;
+        }
+
+        setTshirt(prev => ({ ...prev, [name]: value }));
+    };
+
+   const handleNameKeyDown = (e) => {
+        if (e.key === 'Enter') {
+        e.preventDefault();
+        }
+    };
 
     const handleDelete = async () => {
         await axios.delete(`/api/tshirts/${id}`).then(() => {
@@ -64,6 +76,7 @@ const EditView = () => {
             </div>
         </div>
         {tshirt ? (
+            <div>
             <div className="edit-view-content">
                 <div className="edit-form">
                 <input
@@ -71,6 +84,7 @@ const EditView = () => {
                     name="name"
                     value={tshirt.name}
                     onChange={handleInputChange}
+                    onKeyDown={handleNameKeyDown}
                 />
                 
                 <Dropdown
@@ -108,12 +122,13 @@ const EditView = () => {
                         <TshirtCard {...tshirt} />
                     </div>
                 </div>
-                <button className="submit-button" onClick={handleUpdate}>Update</button>
             </div>
+
+             </div>
         ) : (
           <p>Loading t-shirt details...</p>
         )}
-
+        <button className="submit-button" onClick={handleUpdate}>Update</button>
     </div>
   );
 };

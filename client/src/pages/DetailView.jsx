@@ -38,7 +38,7 @@ const DetailView = () => {
             <div className="detail-view-header">
                 <h1>T-Shirt Details</h1>
                 <div className="buttons-container">
-                <button className="card-button" onClick={() => navigate(`/edit/${id}`)}>Edit</button>
+                <button className="card-button" onClick={() => navigate(`/tshirts/edit/${id}`)}>Edit</button>
                 <button className="card-button" onClick={() => handleDelete(id)}>Delete</button>
                 </div>
             </div>

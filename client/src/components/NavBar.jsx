@@ -10,7 +10,7 @@ const NavBar = ({ currentMode, onClick }) => {
         <Link to="/">Home</Link>
         <Link to="/tshirts">T-Shirts</Link>
         <Link to="/tshirts/create">Create T-Shirt</Link>
-        <button className="toggle-theme" onClick={onClick}> {currentMode === "light" ? "Dark Mode" : "Light Mode"}</button>
+        <button className="toggle-theme-button" onClick={onClick}> {currentMode === "light" ? "Dark Mode" : "Light Mode"}</button>
     </div>
   );
 }
