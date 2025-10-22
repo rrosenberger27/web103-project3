@@ -44,19 +44,26 @@ const EditView = () => {
     };
 
     const handleDelete = async () => {
-        await axios.delete(`/api/tshirts/${id}`).then(() => {
-            console.log("T-shirt deleted successfully");
-            navigate('/tshirts');
-        }).catch((error) => {
-            console.error("Error deleting t-shirt:", error);
-        });
+    if (window.confirm("Are you sure you want to delete this t-shirt?")) {
+      await axios.delete(`/api/tshirts/${id}`).then(() => {
+        console.log("T-shirt deleted successfully");
+        navigate('/tshirts');
+      }).catch((error) => {
+        console.error("Error deleting t-shirt:", error);
+      });
     }
+  };
 
     const handleUpdate = async (e) => {
         e.preventDefault();
         if (!tshirt.name.trim()) {
             alert("Please enter a name for the t-shirt.");
             return;
+        }
+
+        if (tshirt.stripes === 'none' && tshirt.logo === 'none') {
+        alert("Please select at least a logo or stripes for the t-shirt.");
+        return;
         }
         await axios.put(`/api/tshirts/${id}`, tshirt).then((response) => {
             console.log("T-shirt updated successfully:", response.data);

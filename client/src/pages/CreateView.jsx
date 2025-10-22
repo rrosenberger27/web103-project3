@@ -41,6 +41,11 @@ const CreateView = () => {
         alert("Please enter a name for the t-shirt.");
         return;
     }
+
+    if (tshirt.stripes === 'none' && tshirt.logo === 'none') {
+        alert("Please select at least a logo or stripes for the t-shirt.");
+        return;
+    }
     await axios.post('/api/tshirts', tshirt).then((response) => {
         console.log("T-shirt created successfully:", response.data);
         navigate(`/tshirts/${response.data.id}`);

@@ -22,6 +22,17 @@ const ListView = () => {
     fetchTshirts();
   }, []);
 
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this t-shirt?")) {
+      await axios.delete(`/api/tshirts/${id}`).then(() => {
+        console.log("T-shirt deleted successfully");
+        setTshirts(prevTshirts => prevTshirts.filter(tshirt => tshirt.id !== id));
+      }).catch((error) => {
+        console.error("Error deleting t-shirt:", error);
+      });
+    }
+  };
+
   return (
     <div>
       <h1 className='list-view-title'>All T-Shirts</h1>

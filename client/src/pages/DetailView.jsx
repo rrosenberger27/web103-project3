@@ -23,14 +23,16 @@ const DetailView = () => {
     }, [id]);
 
 
-    const handleDelete = async (id) => {
-        await axios.delete(`/api/tshirts/${id}`).then(() => {
-            console.log("T-shirt deleted successfully");
-            navigate('/tshirts');
-        }).catch((error) => {
-            console.error("Error deleting t-shirt:", error);
-        });
-    };
+    const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this t-shirt?")) {
+      await axios.delete(`/api/tshirts/${id}`).then(() => {
+        console.log("T-shirt deleted successfully");
+        navigate('/tshirts');
+      }).catch((error) => {
+        console.error("Error deleting t-shirt:", error);
+      });
+    }
+  };
 
 
     return (
